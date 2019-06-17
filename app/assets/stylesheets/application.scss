@@ -1,0 +1,52 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require _reset
+ *= require_self
+ *= require dice_pools
+ *
+ */
+
+$body-background-color: black;
+$shadow-background: rgba(144, 144, 144, 0.3);
+
+ @import 'defaults/*';
+ @import 'fonts';
+ @import 'icons/*';
+
+body {
+  font-family: verdana, arial, helvetica, sans-serif;
+  background-color: $body-background-color;
+  color: #bbb;
+  line-height: 1.5em;
+  font-size: 4.25vw;
+  @media (min-width: 463px) {
+    font-size: 20px;
+  }
+}
+
+body * {
+  background-color: transparent;
+}
+
+.hrule {
+  background: $shadow-background;
+  height: 0.1em;
+  width: 100%;
+}
+
+.centered {
+  text-align: center;
+}
+
+@import 'navigation';
+@import 'scaffolds';

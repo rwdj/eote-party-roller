@@ -1,0 +1,45 @@
+// Place all the styles related to navigation here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.nav {
+  width: 100%;
+  font-size: 1.5em;
+  z-index: 2;
+
+  div.nav-table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  div.nav-td {
+    display: table-cell;
+    text-align: center;
+
+    // Extend a clickable div's font hover color to child links
+    > a, > div.btn {
+      padding: 0.27em 0;
+      display: block;
+    }
+
+    &:hover:not(:empty) {
+      background-color: $shadow-background;
+      cursor: pointer;
+    }
+  }
+
+  background-image: linear-gradient(to bottom, #0000, #000f, #0000);
+  &.top, &.bottom {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+  }
+  &.top {
+    top: 0;
+    background-image: linear-gradient(to bottom, #000f, #000f, #0000);
+  }
+  &.bottom {
+    bottom: 0;
+    background-image: linear-gradient(to bottom, #0000, #000f, #000f)
+  }
+}

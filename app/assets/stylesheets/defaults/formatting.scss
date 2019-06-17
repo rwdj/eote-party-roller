@@ -1,0 +1,14 @@
+i, em { font-style: italic }
+b, strong { font-weight: bold }
+mark { background-color: #ff0 }
+small { font-size: small }
+del { text-decoration: line-through }
+ins { text-decoration: underline }
+sub {
+  vertical-align: sub;
+  font-size: small;
+}
+sup {
+  vertical-align: super;
+  font-size: small;
+}

@@ -1,0 +1,20 @@
+$fa-font-path: 'fontawesome';
+@import "fontawesome/fontawesome";
+
+@import "fontawesome/solid";
+.fas-icon {
+  @extend %fa-icon;
+  @extend .fas;
+}
+
+@import "fontawesome/regular";
+.far-icon {
+  @extend %fa-icon;
+  @extend .far;
+}
+
+@import "fontawesome/light";
+.fal-icon {
+  @extend %fa-icon;
+  @extend .fal;
+}

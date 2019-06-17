@@ -1,0 +1,56 @@
+// Place all the styles related to tables here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$clickable-color: #00BC8A;
+$clickable-hovor-color: #00A9A7;
+
+a, div.btn {
+  width: 100%;
+  height: 100%;
+  display:inline-block;
+
+  color: $clickable-color;
+  &:hover { color: $clickable-hovor-color; }
+  text-decoration: none;
+}
+
+.collapsible {
+  padding: 0.2em 0;
+  &.collapsible-active, &:hover {
+    background-color: $shadow-background;
+  }
+  * {
+    background: none;
+  }
+}
+.collapsible, .collapsible * {
+  text-align: center;
+  color: $clickable-color;
+  &:hover { color: $clickable-hovor-color; }
+
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  line-height: 1.5em;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.collapsible-content {
+  cursor: pointer;
+  display: none;
+  width: 95%;
+  border: solid;
+  border-width: 2.5vw;
+  border-color: $shadow-background;
+
+  textarea {
+    color: white;
+    background-color: black;
+    width: 100%;
+    font-size: 1.25em;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+  }
+}

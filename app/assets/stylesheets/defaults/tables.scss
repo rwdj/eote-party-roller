@@ -1,0 +1,39 @@
+// Place all the styles related to tables here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Table Footer */
+//   tfoot {
+//     border-top: solid 2px;
+
+//     border-top-color: rgba(144, 144, 144, 0.25);
+//   }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: solid 1px;
+  border-top: solid 1px;
+  border-bottom-color: #90909047;
+  border-top-color: #d4878747;
+
+  &:nth-child(odd) {
+    background-color: #9090901a;
+  }
+
+  &:nth-child(n + 2) {
+    border-top: none;
+  }
+
+}
+
+th, td {
+  padding: 0.5em 0.4em;
+
+  &:nth-child(n) {
+    vertical-align: middle;
+  }
+}

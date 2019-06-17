@@ -10,6 +10,42 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+form {
+
+  input, select, label, textarea {
+    color: #bbb;
+  }
+
+  input[type='text'], select {
+    background-color: #000;
+    width: 95%;
+    margin: 0 2.5% 0;
+    line-height: 1.3em;
+  }
+
+  input[type='text'] {
+    border-top: none;
+    border-right: none;
+    border-bottom: solid 0.1em;
+    border-left: none;
+  }
+
+  input[type='checkbox'] {
+    margin: 0 2.5%;
+  }
+
+  div {
+    &.block-field, &.action {
+      margin-bottom: 1em;
+      width: 95%;
+      padding: 0 2.5%;
+    }
+  }
+
+  label {
+    display: block;
+  }
+}
