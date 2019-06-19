@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# frozen_string_literal: true
+
+require_relative File.join('seeds', 'side_type')
+require_relative File.join('seeds', 'die')
