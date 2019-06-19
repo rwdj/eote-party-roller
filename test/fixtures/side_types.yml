@@ -1,0 +1,32 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+blank:
+  results: {}
+s1:
+  results: { success: 1 }
+s2:
+  results: { success: 2 }
+f1:
+  results: { success: -2 }
+f2:
+  results: { success: -2 }
+a2:
+  results: { advantage: 2 }
+t2:
+  results: { advantage: -2 }
+s2a2:
+  results: { success: 2, advantage: 2 }
+s4a4:
+  results: { success: 4, advantage: 4 }
+f2t2:
+  results: { success: -2, advantage: -2 }
+f4t4:
+  results: { success: -4, advantage: -4 }
+s1de1:
+  results: { success: 1, despair: 1 }
+s1tr1:
+  results: { success: 1, triumph: 1 }
+s2de1:
+  results: { success: 2, despair: 1 }
+li2da2:
+  results: { light: 2, dark: 2 }
