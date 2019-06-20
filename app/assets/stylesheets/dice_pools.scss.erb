@@ -18,14 +18,14 @@ div.rolled-die {
 
   background-size: cover;
 
-  <% Die::NAMES.map(&:to_s).each do |die_name| %>
+  <% DieTypes::ALL.map(&:to_s).each do |die_name| %>
     &.<%= die_name %> {
       background-image: asset-url("<%= image_path(rolled_image_path.call(die_name)) %>");
     }
   <% end %>
 
   <%# Re-centered results %>
-  <% %w[ability proficiency fate].each do |die_name| %>
+  <% DieTypes::REPOSITIONED.each do |die_name| %>
     &.<%= die_name %> div.die-result {
       position: relative;
       top: 5%;
@@ -70,7 +70,7 @@ div.result {
 div.result, div.die-result {
   background-size: cover;
 
-  <% (SideType::RESULT_TYPES.map(&:to_s) + %w[failure threat]).each do |result_type| %>
+  <% ResultTypes::ALL.map(&:to_s).each do |result_type| %>
     &.<%= result_type %> {
       background-image: asset-url("<%= image_path(rolled_image_path.call('results', result_type)) %>");
     }
@@ -110,7 +110,7 @@ div.result, div.rolled-die {
     height: 20vw;
     background-size: cover;
 
-    <% %w[ability boost challenge difficulty fate proficiency setback].each do |die_name| %>
+    <% DieTypes::ALL.map(&:to_s).each do |die_name| %>
       &.<%= die_name %> {
         background-image: asset-url("<%= image_path(File.join('dice', 'icon', die_name)) %>");
       }
