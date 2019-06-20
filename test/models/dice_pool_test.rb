@@ -43,7 +43,7 @@ class DicePoolTest < ActiveSupport::TestCase
     assert_not dice_pool.valid?, 'Purpose too long'
     dice_pool.purpose = 'i' * 300
     assert_not dice_pool.valid?, 'Purpose limit excluded'
-    dice_pool.purpose = 'iii'
+    dice_pool.purpose = 'ii'
     assert dice_pool.valid?, 'Purpose just right'
   end
 
