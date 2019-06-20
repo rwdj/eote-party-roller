@@ -5,6 +5,16 @@
 <%# Rolled %>
 <% rolled_image_path = -> (*sub_path_args) { File.join('dice', 'rolled', *sub_path_args) } %>
 
+
+%length-5-flex-item-size {
+  width: 20vw;
+  height: 20vw;
+  @media (min-width: 463px) {
+    width: 92px;
+    height: 92px;
+  }
+}
+
 div.flex-container {
   display: inline-flex;
   flex-wrap: wrap;
@@ -84,8 +94,7 @@ div.result, div.rolled-die {
 
 #roller-results {
   div.result, div.rolled-die {
-    height: 20vw;
-    width: 20vw;
+    @extend %length-5-flex-item-size;
   }
 }
 
@@ -106,8 +115,7 @@ div.result, div.rolled-die {
   }
 
   div.dice-selection-die {
-    width: 20vw;
-    height: 20vw;
+    @extend %length-5-flex-item-size;
     background-size: cover;
 
     <% DieTypes::ALL.map(&:to_s).each do |die_name| %>
