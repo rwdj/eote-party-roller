@@ -21,14 +21,14 @@ class DicePool
 
   validates :roller, presence: true, length: {
     in: 2...10,
-    message: 'Must have a roller name (Minimum: 2, Maximum: 10).'
+    message: 'Must have a roller name (Maximum: 10).'
   }
   validates :dice, allow_nil: false, length: {
     minimum: 1, message: 'Must have dice to roll.'
   }
   validates :purpose, presence: true, length: {
-    in: 3...300,
-    message: 'Must have a purpose (Minimum: 3, Maximum: 300).'
+    in: 2...300,
+    message: 'Must have a purpose (Maximum: 300).'
   }
 
   define_model_callbacks :initialize, only: :after
