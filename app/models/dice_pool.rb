@@ -112,7 +112,7 @@ class DicePool
   def cookie_dice
     LogHandler::Debug.log_dice_results dice
     dice.map do |die, die_results|
-      [die.name.to_s, die_results.map(&:results)]
+      [die.name.to_s, die_results.map(&:displayable_results)]
     end.to_h.to_json
   end
 

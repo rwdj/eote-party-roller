@@ -120,6 +120,10 @@ class SideType < ApplicationRecord
     sort_results(final_results.reject { |_, value| value.zero? })
   end
 
+  def displayable_results
+    sort_results(finalize_negating_results!(results.clone))
+  end
+
   private
 
   def finalize_exceptional_results!(final_results)
