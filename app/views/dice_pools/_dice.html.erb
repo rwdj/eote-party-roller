@@ -1,0 +1,9 @@
+<div class='flex-container dice-results'>
+  <% dice.each do |die, die_results| %>
+    <% die_results.each do |die_result| %>
+      <div class='rolled-die <%= die.downcase %>'>
+        <%= parse_die_result(die_result) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
