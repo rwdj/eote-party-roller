@@ -87,7 +87,7 @@ class DicePoolsController < ApplicationController
     @dice_pool.roll
     save_roll
     redirect_to(roller_path)
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveModel::ValidationError
     LogHandler::Debug.log_invalid_dice_pool @dice_pool.errors.to_s
     redirect_to(roller_path, notice: @dice_pool.errors)
   end
