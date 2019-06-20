@@ -3,7 +3,6 @@ class DiceDataHandler
 
   load: ->
     @_node = document.getElementById 'dice_pool_dice'
-    console.info @fetch()
 
   update: (dice_data) ->
     @_node.value = JSON.stringify dice_data
