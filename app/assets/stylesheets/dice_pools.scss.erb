@@ -5,6 +5,13 @@
 <%# Rolled %>
 <% rolled_image_path = -> (*sub_path_args) { File.join('dice', 'rolled', *sub_path_args) } %>
 
+.spoiler {
+	filter: blur(20px);
+	transition-property: filter;
+	transition-duration: .4s;
+
+  &:hover { filter: blur(0px); }
+}
 
 %length-5-flex-item-size {
   width: 20vw;

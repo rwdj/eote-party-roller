@@ -12,8 +12,9 @@ App.dice_pools = App.cable.subscriptions.create('DicePoolsChannel', {
   },
 
   renderDicePool: function(data) {
+    spoiler_line = /^<div class="tooltip">dnr/i.test(data.purpose) ? ' class="spoiler"' : ''; // TODO: cleanup
     return [
-      '<tr>',
+      '<tr' + spoiler_line + '>',
       '<td>' + data.roller + '</td>',
       '<td>' + data.purpose + '</td>',
       '<td>' + data.dice + '</td>',
