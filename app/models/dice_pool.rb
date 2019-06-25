@@ -14,6 +14,7 @@ class DicePool
 
   DEFAULT_ROLLER = 'Anon'
   DEFAULT_PURPOSE = 'N/A'
+  DNR_SEQUENCE = "#{27.chr}d"
 
   define_attribute_methods :roller, :dice, :purpose, :result
   attr_accessor :roller, :dice, :purpose
@@ -95,7 +96,7 @@ class DicePool
 
     {
       roller: roller,
-      purpose: purpose_html,
+      purpose: purpose,
       dice: DicePoolsController.render_dice(JSON.parse(cookie_dice)),
       result: DicePoolsController.render_result(JSON.parse(cookie_result))
     }
@@ -151,15 +152,5 @@ class DicePool
     self.roller ||= 'Anon'
     self.purpose ||= 'N/A'
     self.dice ||= {}
-  end
-
-  def purpose_html
-    [
-      '<div class="tooltip">',
-      purpose[0...4], '….',
-      '<span class="tooltiptext">',
-      purpose,
-      '</span></div>'
-    ].join
   end
 end

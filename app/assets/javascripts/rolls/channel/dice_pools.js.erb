@@ -3,6 +3,8 @@ this.App = {};
 App.cable = ActionCable.createConsumer();
 
 App.dice_pools = App.cable.subscriptions.create('DicePoolsChannel', {
+  DNR_SEQUENCE: /^<%= DicePool::DNR_SEQUENCE %>/,
+
   received: function(data) {
     const wasScrolledToBottom = this.isScrolledToBottom();
     $('#dice-pools').prepend(this.renderDicePool(data));
@@ -12,15 +14,22 @@ App.dice_pools = App.cable.subscriptions.create('DicePoolsChannel', {
   },
 
   renderDicePool: function(data) {
-    spoiler_line = /^<div class="tooltip">dnr/i.test(data.purpose) ? ' class="spoiler"' : ''; // TODO: cleanup
     return [
-      '<tr' + spoiler_line + '>',
+      '<tr' + this.spoiler_line(data) + '>',
       '<td>' + data.roller + '</td>',
       '<td>' + data.purpose + '</td>',
       '<td>' + data.dice + '</td>',
       '<td>' + data.result + '</td>',
       '</tr>'
     ].join();
+  },
+
+  spoiler_line: function(data) {
+    if (this.DNR_SEQUENCE.test(data.purpose)) {
+      data.purpose = data.purpose.replace(this.DNR_SEQUENCE, '');
+      return ' class="spoiler"';
+    }
+    return '';
   },
 
   isScrolledToBottom: function() {
