@@ -5,7 +5,7 @@ App.cable = ActionCable.createConsumer();
 App.dice_pools = App.cable.subscriptions.create('DicePoolsChannel', {
   received: function(data) {
     const wasScrolledToBottom = this.isScrolledToBottom();
-    $('#dice-pools').append(this.renderDicePool(data));
+    $('#dice-pools').prepend(this.renderDicePool(data));
 
     if (!wasScrolledToBottom) window.scrollBy(0, 10000);
     return;
