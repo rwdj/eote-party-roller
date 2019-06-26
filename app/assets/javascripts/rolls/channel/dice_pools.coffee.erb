@@ -1,0 +1,26 @@
+@App = {}
+
+App.cable = ActionCable.createConsumer()
+
+App.dice_pools = App.cable.subscriptions.create 'DicePoolsChannel', {
+  DNR_SEQUENCE: /^<%= DicePool::DNR_SEQUENCE %>/
+
+  received: (data) ->
+    $('#dice-pools').prepend @renderDicePool(data)
+
+  renderDicePool: (data) ->
+    [
+      '<tr' + this.spoiler_line(data) + '>',
+      '<td>' + data.roller + '</td>',
+      '<td>' + data.purpose + '</td>',
+      '<td>' + data.dice + '</td>',
+      '<td>' + data.result + '</td>',
+      '</tr>'
+    ].join()
+
+  spoiler_line: (data) ->
+    if @DNR_SEQUENCE.test(data.purpose)
+      data.purpose = data.purpose.replace @DNR_SEQUENCE, ''
+      return ' class="spoiler"'
+    ''
+}
