@@ -2,7 +2,7 @@
 
 App.cable = ActionCable.createConsumer()
 
-App.dice_pools = App.cable.subscriptions.create 'DicePoolsChannel', {
+App.dice_pools = App.cable.subscriptions.create 'DicePoolsChannel',
   DNR_SEQUENCE: /^<%= DicePool::DNR_SEQUENCE %>/
 
   received: (data) ->
@@ -10,7 +10,7 @@ App.dice_pools = App.cable.subscriptions.create 'DicePoolsChannel', {
 
   renderDicePool: (data) ->
     [
-      '<tr' + this.spoiler_line(data) + '>',
+      '<tr' + @spoiler_line(data) + '>',
       '<td>' + data.roller + '</td>',
       '<td>' + data.purpose + '</td>',
       '<td>' + data.dice + '</td>',
@@ -23,4 +23,3 @@ App.dice_pools = App.cable.subscriptions.create 'DicePoolsChannel', {
       data.purpose = data.purpose.replace @DNR_SEQUENCE, ''
       return ' class="spoiler"'
     ''
-}
