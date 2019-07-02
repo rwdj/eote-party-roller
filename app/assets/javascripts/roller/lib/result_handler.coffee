@@ -18,6 +18,10 @@ class @ResultHandler
     @_set_results(results)
     @_set_dice(grouped_dice)
 
+  @_load_result_node: (type) ->
+    @_result_nodes[type.replace(/-/, '_')] =
+      document.querySelectorAll("#results .#{type}")[0]
+
   @_reset: ->
     for _, node of @_result_nodes
       node.innerHTML = ''
@@ -50,7 +54,3 @@ class @ResultHandler
   @_set_die_result: (die_node, result_type) ->
     result_html = @TEMPLATES.DIE_RESULT.replace(/\${result}/, result_type)
     die_node.innerHTML += result_html
-
-  @_load_result_node: (type) ->
-    @_result_nodes[type.replace(/-/, '_')] =
-      document.querySelectorAll("#roller-results .#{type}")[0]
