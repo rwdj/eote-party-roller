@@ -1,5 +1,6 @@
-class DiceDataHandler
-  constructor: ->
+# dice_data_handler.coffee
+#
+# Handles fetching and seting dice in the page
 
   load: ->
     @_node = document.getElementById 'dice_pool_dice'

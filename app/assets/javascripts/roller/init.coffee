@@ -1,3 +1,7 @@
+# init.coffee
+#
+# Initialises onload events
+
 initSubmitButtons = ->
   for button in document.querySelectorAll '.btn.submit'
     button.addEventListener 'click', -> document.forms[0].submit()
