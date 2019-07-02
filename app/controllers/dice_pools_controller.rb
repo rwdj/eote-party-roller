@@ -40,37 +40,25 @@ class DicePoolsController < ApplicationController
     LogHandler::Info.log 'Getting roller'
 
     @dice_pool = fetch_dice_pool
-    @result = fetch_roll_result
-    @dice = fetch_roll_dice
+    @result = { pool: fetch_roll_result, dice: fetch_roll_dice }
 
-    LogHandler::Debug.log_dice_pool @dice_pool
-    LogHandler::Debug.log_dice @dice_pool.dice
     render layout: 'roller'
   end
 
   # POST /roller
   def roll
-    LogHandler::Info.log 'Rolling'
-    LogHandler::Debug.log_params dice_pool_params
+    @dice_pool = DicePool.new(dice_pool_params)
+    cookies[:dice_pool] = @dice_pool.as_json
 
-    LogHandler::Debug.log_dice_pool @dice_pool = DicePool.new(dice_pool_params)
-    LogHandler::Debug.log_dice_pool_cookie(
-      cookies[:dice_pool] = @dice_pool.as_json
-    )
-
-    return render json: handle_roll
+    handle_roll
   end
 
   private
 
   def fetch_dice_pool
-    LogHandler::Info.log 'Fetching Dice Pool'
     return DicePool.new unless cookies[:dice_pool].present?
 
-    LogHandler::Debug.log_dice_pool_cookie cookies[:dice_pool]
-    dice_pool = DicePool.new.from_json(cookies[:dice_pool])
-  ensure
-    LogHandler::Debug.log_parsed_dice_pool_cookie dice_pool
+    DicePool.new.from_json(cookies[:dice_pool])
   end
 
   def fetch_roll_result
@@ -78,9 +66,6 @@ class DicePoolsController < ApplicationController
 
     result = JSON.parse(cookies[:result])
     self.class.render_result(result)
-  ensure
-    LogHandler::Debug.log_result_cookie cookies[:result]
-    LogHandler::Debug.log_parsed_result_cookie result
   end
 
   def fetch_roll_dice
@@ -88,9 +73,6 @@ class DicePoolsController < ApplicationController
 
     dice = JSON.parse(cookies[:dice])
     self.class.render_dice(dice)
-  ensure
-    LogHandler::Debug.log_dice_cookie cookies[:dice]
-    LogHandler::Debug.log_parsed_cookie_dice dice
   end
 
   # Never trust parameters; only allow the white list.
@@ -102,20 +84,17 @@ class DicePoolsController < ApplicationController
   def handle_roll
     @dice_pool.validate!
 
-    LogHandler::Info.log 'Handling Valid Roll...'
     @dice_pool.roll
     save_roll
-    return { result: cookies[:result], dice: cookies[:dice] }
+
+    render json: { result: cookies[:result], dice: cookies[:dice] }
   rescue ActiveModel::ValidationError
-    LogHandler::Debug.log_invalid_dice_pool @dice_pool.errors.to_s
-    redirect_to(roller_path, notice: @dice_pool.errors.values.flatten.join(' '))
+    render json: { message: @dice_pool.errors.values.flatten.join(' ') },
+           status: 422
   end
 
   def save_roll
     cookies[:result] = @dice_pool.cookie_result
     cookies[:dice] = @dice_pool.cookie_dice
-  ensure
-    LogHandler::Debug.log_set_result_cookie cookies[:result]
-    LogHandler::Debug.log_set_dice_cookie cookies[:dice]
   end
 end
