@@ -16,8 +16,4 @@ initDirectionButtons = ->
       window.scrollBy(0, document.body.scrollHeight)
 document.addEventListener 'turbolinks:load', initDirectionButtons
 
-initSelectors = ->
-  window.DICE_DATA_HANDLER.load()
-  for dieGroup in document.querySelectorAll '.dice-selection-dice'
-    new window.SelectorGroup(dieGroup)
-document.addEventListener 'turbolinks:load', initSelectors
+document.addEventListener 'turbolinks:load', @initRollHandler

@@ -86,7 +86,7 @@ class DicePool
 
     dice.each_key { |die| roll_die(die) }
     sum_result
-    DicePoolBroadcastJob.perform_later result_json
+    # DicePoolBroadcastJob.perform_later result_json
 
     result
   end

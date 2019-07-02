@@ -1,0 +1,9 @@
+# templates.coffee.erb
+#
+# Loads templates for setting HTML from Rails view partials
+
+@TEMPLATES = {
+  <% %w[die_result rolled_die result].each do |template_name| %>
+    <%= template_name.underscore.upcase %>: "<%= DicePoolsController.send("render_#{template_name}_template") %>"
+  <% end %>
+}

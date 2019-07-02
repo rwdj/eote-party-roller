@@ -1,3 +1,8 @@
+# selector.coffee
+#
+# Impliments the selection behavior within a group of selectable dice of a
+# specifc type (i.e.: ability)
+
 class @SelectorGroup.Selector
     constructor: (@_previousSelector, @node, @nextSelector) ->
       @_set false

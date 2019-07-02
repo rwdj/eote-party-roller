@@ -1,9 +1,19 @@
+# selector_group.coffee
+#
+# Impliments a group of selectable dice of a specifc type (i.e.: ability)
+#
+#= require ../dice_data_handler
 #= require_self
 #= require ./selector_group/selector
 #= require ./selector_group/selector_collection
 
 class @SelectorGroup
   @all: []
+
+  @init: ->
+    window.DiceDataHandler.init()
+    for dieGroup in document.querySelectorAll '.dice-selection-dice'
+      new @(dieGroup)
 
   @reset: ->
     for selectorGroup in @all
@@ -19,9 +29,9 @@ class @SelectorGroup
   toggle: (selectorIndex) ->
     isActive = @_selectors.toggle(selectorIndex)
     if isActive
-      DICE_DATA_HANDLER.set(@dieName, selectorIndex + 1)
+      window.DiceDataHandler.set(@dieName, selectorIndex + 1)
     else
-      DICE_DATA_HANDLER.remove(@dieName)
+      window.DiceDataHandler.remove(@dieName)
 
   _reset: ->
     @_selectors.last.reset()
@@ -29,7 +39,7 @@ class @SelectorGroup
   _initSelectors: (firstNode) ->
     @_selectors = new @constructor.SelectorCollection(firstNode, @)
 
-    initialActive = DICE_DATA_HANDLER.fetch()[@dieName]
+    initialActive = window.DiceDataHandler.fetch()[@dieName]
     initialDieCount = Math.max(5, initialActive) || 5
     while @_selectors.length < initialDieCount
       @_selectors.expand()

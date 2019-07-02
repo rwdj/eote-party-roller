@@ -1,19 +1,38 @@
 class DicePoolsController < ApplicationController
   class << self
+    RENDER_TEMPLATE_MATCH = /^render_(\w*)_template$/.freeze
+
     def render_result(result)
       LogHandler::Debug.log 'Debugging render_result'
-      render partial: 'result', locals: { results: result }
+      render partial: 'results', locals: { results: result }
     end
 
     def render_dice(dice)
       LogHandler::Debug.log 'Debugging render_dice'
-      render partial: 'dice', locals: { dice: dice }
+      render partial: 'dice_results', locals: { dice: dice }
     end
-  end
 
-  # GET /rolls
-  def index
-    render layout: 'index'
+    def method_missing(name, *args, &block)
+      if (template = fetch_template(name))
+        return template
+      end
+
+      super
+    end
+
+    def fetch_template(name)
+      if name.to_s.match(RENDER_TEMPLATE_MATCH)
+        return render partial: Regexp.last_match(1)
+      end
+
+      false
+    rescue ActionView::MissingTemplate
+      false
+    end
+
+    def respond_to_missing?(method, *)
+      method.match?(RENDER_TEMPLATE_MATCH) || super
+    end
   end
 
   # GET /roller
@@ -32,14 +51,14 @@ class DicePoolsController < ApplicationController
   # POST /roller
   def roll
     LogHandler::Info.log 'Rolling'
-
     LogHandler::Debug.log_params dice_pool_params
+
     LogHandler::Debug.log_dice_pool @dice_pool = DicePool.new(dice_pool_params)
     LogHandler::Debug.log_dice_pool_cookie(
       cookies[:dice_pool] = @dice_pool.as_json
     )
 
-    handle_roll
+    return render json: handle_roll
   end
 
   private
@@ -83,10 +102,10 @@ class DicePoolsController < ApplicationController
   def handle_roll
     @dice_pool.validate!
 
-    LogHandler::Info.log 'Rolling...'
+    LogHandler::Info.log 'Handling Valid Roll...'
     @dice_pool.roll
     save_roll
-    redirect_to(roller_path)
+    return { result: cookies[:result], dice: cookies[:dice] }
   rescue ActiveModel::ValidationError
     LogHandler::Debug.log_invalid_dice_pool @dice_pool.errors.to_s
     redirect_to(roller_path, notice: @dice_pool.errors.values.flatten.join(' '))
