@@ -97,8 +97,8 @@ class DicePool
     {
       roller: roller,
       purpose: purpose,
-      dice: DicePoolsController.render_dice(JSON.parse(cookie_dice)),
-      result: DicePoolsController.render_result(JSON.parse(cookie_result))
+      dice: cookie_dice,
+      result: cookie_result
     }
   end
 

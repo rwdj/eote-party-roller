@@ -10,7 +10,7 @@ class @ResultHandler
 
   @init: ->
     @_result_nodes = {}
-    for result_type in ['results', 'dice-results']
+    for result_type in ['pool-results', 'dice-results']
       @_load_result_node(result_type)
 
   @set: (results, grouped_dice) ->
@@ -33,7 +33,7 @@ class @ResultHandler
 
   @_set_result: (result) ->
     result_html = @TEMPLATES.RESULT.replace(/\${result}/, result)
-    @_result_nodes.results.innerHTML += result_html
+    @_result_nodes.pool_results.innerHTML += result_html
 
   @_set_dice: (dice) ->
     for die_type, dice_results of dice
