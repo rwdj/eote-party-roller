@@ -1,9 +1,7 @@
-# result_handler.coffee
-#
 # Parses results onto the roller page
 #
 #= require ./struct/templates
-#= require_self
+#= require ./struct/selector_group
 
 class @ResultHandler
   @init: ->

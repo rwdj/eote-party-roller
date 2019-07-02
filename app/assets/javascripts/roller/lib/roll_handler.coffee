@@ -1,9 +1,6 @@
-# roll_handler.coffee
-#
 # Handles rolls made my the user
 #
 #= require ./dice_pool_extractor
-#= require_self
 
 class @RollHandler
   @init: -> @_initDependencies()
@@ -15,7 +12,7 @@ class @RollHandler
     window.DicePoolExtractor.init()
     window.ResultHandler.init()
 
-@initRollHandler = ->
+document.addEventListener 'turbolinks:load', ->
   window.RollHandler.init()
   for rollBtn in document.querySelectorAll '.btn.roll'
     rollBtn.addEventListener 'click', -> window.RollHandler.roll()

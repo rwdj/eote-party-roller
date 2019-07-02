@@ -1,7 +1,5 @@
-# dice_pool.coffee
-#
 # Impliments a rollable dicepool object
-#= require_self
+#
 #= require ../result_handler
 
 class @DicePool

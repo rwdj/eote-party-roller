@@ -1,14 +1,9 @@
-# channel.coffee
-#
 # Impliments the broadcast receiver (channel) for ActionCable
 #
 #= require ./lib/struct/templates
 #= require ./lib/result_handler
-#= require_self
 
-@App = {}
-
-App.cable = ActionCable.createConsumer()
+App = @App
 
 App.rolls = App.cable.subscriptions.create 'RollsChannel', {
   received: (data) ->

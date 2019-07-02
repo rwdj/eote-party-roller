@@ -25,12 +25,16 @@ class DicePoolsController < ApplicationController
     end
   end
 
+
   # GET /index
   def index
     @dice_pool = fetch_dice_pool
 
-    render layout: 'roller'
+    render layout: 'index'
   end
+
+  # GET /gm
+  alias gm_index index
 
   # POST /index
   def roll

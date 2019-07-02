@@ -14,7 +14,7 @@ class DicePool
 
   DEFAULT_ROLLER = 'Anon'
   DEFAULT_PURPOSE = 'N/A'
-  DNR_SEQUENCE = "#{27.chr}d"
+  DNR_SEQUENCE = /^dnr(?!\w):?\s*/i.freeze
 
   define_attribute_methods :roller, :dice, :purpose, :result
   attr_accessor :roller, :dice, :purpose

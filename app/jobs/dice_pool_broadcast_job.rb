@@ -11,9 +11,9 @@ class DicePoolBroadcastJob < ApplicationJob
   end
 
   def send_to_dm(dice_pool_hash)
-    dice_pool_hash[:purpose].sub DNR_SEQUENCE
+    dice_pool_hash[:purpose].remove! DNR_SEQUENCE
     dice_pool_hash[:dnr] = true
 
-    ActionCable.server.broadcast 'rolls', dice_pool_hash
+    ActionCable.server.broadcast 'gm_rolls', dice_pool_hash
   end
 end

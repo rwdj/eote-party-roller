@@ -6,7 +6,11 @@
 <% rolled_image_path = -> (*sub_path_args) { File.join('dice', 'rolled', *sub_path_args) } %>
 
 .dnr {
-  background-color: red;
+  background-color: #8B0000;
+
+  &:nth-child(odd) {
+    background-color: #8B0000ee;
+  }
 }
 
 %flex-container {

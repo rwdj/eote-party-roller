@@ -1,9 +1,6 @@
-# dice_pool_extractor.coffee
-#
 # Builds a dice_pool from the current page state
 #
 #= require ./struct/dice_pool
-#= require_self
 
 class @DicePoolExtractor
   @_nodes: {}
