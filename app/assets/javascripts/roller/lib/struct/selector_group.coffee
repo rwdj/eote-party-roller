@@ -12,7 +12,7 @@ class @SelectorGroup
 
   @init: ->
     window.DiceDataHandler.init()
-    for dieGroup in document.querySelectorAll '.dice-selection-dice'
+    for dieGroup in document.querySelectorAll '.dice-selection .dice'
       new @(dieGroup)
 
   @reset: ->

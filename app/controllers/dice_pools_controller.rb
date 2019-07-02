@@ -12,8 +12,7 @@ class DicePoolsController < ApplicationController
 
     def fetch_template(name)
       if name.to_s.match(RENDER_TEMPLATE_MATCH)
-        return render partial: File.join(
-          %w[dice_pools templates Regexp.last_match(1)])
+        return render partial: "templates/#{Regexp.last_match(1)}"
       end
 
       false

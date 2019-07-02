@@ -2,8 +2,38 @@
 #
 # Loads templates for setting HTML from Rails view partials
 
-@TEMPLATES = {
-  <% %w[die_result rolled_die result].each do |template_name| %>
-    <%= template_name.underscore.upcase %>: "<%= DicePoolsController.send("render_#{template_name}_template") %>"
+class @Templates
+  @PURPOSE: {
+    DNR: /^dnr[^\w]\s*/i
+    MAX_DISPLAY_LENGTH: 4
+    TEMPLATE: "<%= DicePoolsController.send("render_purpose_template") %>"
+  }
+
+  <% %w[die result].each do |template_name| %>
+  @<%= template_name %>: (type) ->
+    str = "<%= DicePoolsController.send("render_#{template_name}_template") %>"
+    str.replace(/\${<%= template_name %>}/, type)
   <% end %>
-}
+
+  <% %w[dice_results pool_results].each do |template_name| %>
+  @<%= template_name %> =
+    "<%= DicePoolsController.send("render_#{template_name}_template") %>"
+  <% end %>
+
+  @purpose: (purpose) ->
+    purpose_hidden = ''
+    if @PURPOSE.DNR.test purpose
+      purpose_hidden = ' dnr'
+      purpose = purpose.replace @PURPOSE.DNR, ''
+    purpose_short = purpose[0...@PURPOSE.MAX_DISPLAY_LENGTH].trim()
+    purpose_short += '…' if purpose.length > 4
+
+    @PURPOSE.TEMPLATE.replace(/\${purpose}/, purpose.trim()
+    ).replace(/\${purpose_hidden}/, purpose_hidden
+    ).replace(/\${purpose_short}/, purpose_short)
+
+
+
+
+
+

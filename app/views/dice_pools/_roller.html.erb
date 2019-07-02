@@ -2,9 +2,9 @@
   <p id='notice'><%= notice %></p>
 
   <div id='results'>
-    <%= render File.join %w[dice_pools templates dice_results] %>
+    <%= render 'templates/dice_results' %>
     <%= hrule(margin: '0.5em 0') %>
-    <%= render File.join %w[dice_pools templates pool_results] %>
+    <%= render 'templates/pool_results' %>
   </div>
   <%= hrule(margin: '0.5em 0') %>
 

@@ -86,7 +86,7 @@ class DicePool
 
     dice.each_key { |die| roll_die(die) }
     sum_result
-    # DicePoolBroadcastJob.perform_later result_json
+    DicePoolBroadcastJob.perform_later result_json
 
     result
   end
@@ -119,7 +119,6 @@ class DicePool
   end
 
   def cookie_dice
-    LogHandler::Debug.log_dice_results dice
     dice.map do |die, die_results|
       [die.name.to_s, die_results.map(&:displayable_results)]
     end.to_h.to_json

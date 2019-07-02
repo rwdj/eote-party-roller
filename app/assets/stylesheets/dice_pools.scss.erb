@@ -5,86 +5,16 @@
 <%# Rolled %>
 <% rolled_image_path = -> (*sub_path_args) { File.join('dice', 'rolled', *sub_path_args) } %>
 
-.spoiler {
-	filter: blur(20px);
-	transition-property: filter;
-	transition-duration: .4s;
-
-  &:hover { filter: blur(0px); }
+.dnr {
+  background-color: red;
 }
 
-%length-5-flex-item-size {
-  width: 20vw;
-  height: 20vw;
-  @media (min-width: 463px) {
-    width: 92px;
-    height: 92px;
-  }
-}
-
-div.flex-container {
+%flex-container {
   display: inline-flex;
   flex-wrap: wrap;
 }
 
-div.rolled-die {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-
-  background-size: cover;
-
-  <% DieTypes::ALL.map(&:to_s).each do |die_name| %>
-    &.<%= die_name %> {
-      background-image: asset-url("<%= image_path(rolled_image_path.call(die_name)) %>");
-    }
-  <% end %>
-
-  <%# Re-centered results %>
-  <% DieTypes::REPOSITIONED.each do |die_name| %>
-    &.<%= die_name %> div.die-result {
-      position: relative;
-      top: 5%;
-    }
-  <% end %>
-  &.ability div.die-result:only-child {
-    top: 7%;
-  }
-  &.difficulty div.die-result {
-    position: relative;
-    bottom: 5%;
-  }
-}
-
-div.die-result {
-  height: 35%;
-  width: 35%;
-  &:only-child {
-    height: 45%;
-    width: 45%;
-  }
-
-  background-size: cover;
-}
-
-div.result {
-  <% %w[failure threat].each do |result_type| %>
-    &.<%= result_type %> {
-      background-color: black;
-    }
-  <% end %>
-  <% %w[advantage dark light].each do |result_type| %>
-    &.<%= result_type %> {
-      background-color: #bbb;
-    }
-  <% end %>
-  &.success { background-color: #19a44b; }
-  &.despair { background-color: #e31837; }
-  &.triumph { background-color: #ffe800; }
-}
-
-div.result, div.die-result {
+.result {
   background-size: cover;
 
   <% ResultTypes::ALL.map(&:to_s).each do |result_type| %>
@@ -94,45 +24,88 @@ div.result, div.die-result {
   <% end %>
 }
 
-div.result, div.rolled-die {
-  height: 2em;
-  width: 2em;
-}
+.dice-results, .pool-results { @extend %flex-container; }
 
-#roller-results {
-  div.result, div.rolled-die {
-    @extend %length-5-flex-item-size;
-  }
-}
-
-#roller {
-  div.dice-selection {
-    display: inline-flex;
-    flex-wrap: wrap;
-  }
-
-  div.dice-selection-group {
+.dice-results {
+  .die {
     display: flex;
-    flex-wrap: wrap;
-  }
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
-  div.dice-selection-dice {
-    display: inline-flex;
-    flex-wrap: wrap;
-  }
-
-  div.dice-selection-die {
-    @extend %length-5-flex-item-size;
     background-size: cover;
 
     <% DieTypes::ALL.map(&:to_s).each do |die_name| %>
       &.<%= die_name %> {
-        background-image: asset-url("<%= image_path(File.join('dice', 'icon', die_name)) %>");
+        background-image: asset-url("<%= image_path(rolled_image_path.call(die_name)) %>");
       }
     <% end %>
 
-    &.faded {
-      opacity: 0.5;
+    <% DieTypes::REPOSITIONED.each do |die_name| %>
+      &.<%= die_name %> .result { position: relative; top: 5%; }
+    <% end %>
+    &.ability .result:only-child { top: 7%; }
+    &.difficulty .result { position: relative; bottom: 5%; }
+
+    .result {
+      height: 35%; width: 35%;
+      &:only-child { height: 45%; width: 45%; }
+    }
+  }
+}
+
+.pool-results {
+  .result {
+    <% %w[failure threat].each do |result_type| %>
+      &.<%= result_type %> { background-color: black; }
+    <% end %>
+    <% %w[advantage dark light].each do |result_type| %>
+      &.<%= result_type %> { background-color: #bbb; }
+    <% end %>
+    &.success { background-color: #19a44b; }
+    &.despair { background-color: #e31837; }
+    &.triumph { background-color: #ffe800; }
+  }
+}
+
+#rolls {
+  display: none;
+
+  .die, .pool-results .result { height: 2em; width: 2em; }
+}
+
+#roller {
+  %length-5-flex-item-size {
+    width: 20vw; height: 20vw;
+    @media (min-width: 463px) { width: 92px; height: 92px; }
+  }
+
+  #results { .die, .pool-results .result { @extend %length-5-flex-item-size; } }
+
+  #dice-pool {
+    .dice-selection {
+      @extend %flex-container;
+
+      .group {
+        display: flex; flex-wrap: wrap;
+
+        .dice {
+          @extend %flex-container;
+
+          .die {
+            @extend %length-5-flex-item-size;
+            background-size: cover;
+
+            <% DieTypes::ALL.map(&:to_s).each do |die_name| %>
+              &.<%= die_name %> {
+                background-image: asset-url("<%= image_path(File.join('dice', 'icon', die_name)) %>");
+              }
+            <% end %>
+
+            &.faded { opacity: 0.5; }
+          }
+        }
+      }
     }
   }
 }

@@ -13,4 +13,9 @@
     @extend .far-icon;
     &:before { content: fa-content($fa-var-chevron-circle-down); }
   }
+
+  &.index {
+    @extend .far-icon;
+    &:before { content: fa-content($fa-var-list-ul); }
+  }
 }

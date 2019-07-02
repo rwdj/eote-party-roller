@@ -24,8 +24,8 @@ class @DicePool
     $.param {
         dice_pool:
           {
-            roller: @roller
-            purpose: @purpose
+            roller: @roller.trim()
+            purpose: @purpose.trim()
             view_dice: JSON.stringify @dice
           }
       }

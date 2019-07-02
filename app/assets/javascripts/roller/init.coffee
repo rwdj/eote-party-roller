@@ -1,14 +1,11 @@
 # init.coffee
 #
 # Initialises onload events
+#
+#= require ./lib/struct/selector_group
+#= require ./lib/roll_handler
+#= require ./lib/buttons
 
-initDirectionButtons = ->
-  for button in document.querySelectorAll '.btn.top'
-    button.addEventListener 'click', ->
-      window.scrollBy(0, -document.body.scrollHeight)
-  for button in document.querySelectorAll '.btn.bottom'
-    button.addEventListener 'click', ->
-      window.scrollBy(0, document.body.scrollHeight)
-document.addEventListener 'turbolinks:load', initDirectionButtons
-
+document.addEventListener 'turbolinks:load', @initButtons
 document.addEventListener 'turbolinks:load', @initRollHandler
+

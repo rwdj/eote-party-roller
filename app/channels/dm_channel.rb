@@ -1,6 +1,6 @@
-class DicePoolsChannel < ApplicationCable::Channel
+class RollsChannel < ApplicationCable::Channel
   def subscribed
-    stream_from 'dice_pools'
+    stream_from 'dm'
   end
 
   def unsubscribed
