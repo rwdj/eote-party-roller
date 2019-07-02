@@ -35,17 +35,15 @@ class DicePoolsController < ApplicationController
     end
   end
 
-  # GET /roller
-  def roller
-    LogHandler::Info.log 'Getting roller'
-
+  # GET /index
+  def index
     @dice_pool = fetch_dice_pool
     @result = { pool: fetch_roll_result, dice: fetch_roll_dice }
 
     render layout: 'roller'
   end
 
-  # POST /roller
+  # POST /index
   def roll
     @dice_pool = DicePool.new(dice_pool_params)
     cookies[:dice_pool] = @dice_pool.as_json

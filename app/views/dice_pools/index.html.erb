@@ -1,9 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= render 'nav', sticky: 'top' %>
 
-<h1>Rolls</h1>
+<%= render 'roller' %>
+<%= render 'rolls' %>
 
- <div id='rolls'>
-  <table>
-    <tbody id='dice-pools'></tbody>
-  </table>
-</div>
+<%= render 'nav', sticky: 'bottom' %>
