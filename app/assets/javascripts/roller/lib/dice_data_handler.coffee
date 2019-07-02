@@ -1,5 +1,3 @@
-# dice_data_handler.coffee
-#
 # Handles fetching and seting dice in the page
 
 class @DiceDataHandler

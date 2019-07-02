@@ -1,5 +1,3 @@
-# selector_collection.coffee
-#
 # Impliments the collection behavior within a group of selectable dice of a
 # specifc type (i.e.: ability)
 

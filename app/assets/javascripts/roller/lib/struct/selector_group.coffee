@@ -1,5 +1,3 @@
-# selector_group.coffee
-#
 # Impliments a group of selectable dice of a specifc type (i.e.: ability)
 #
 #= require ../dice_data_handler

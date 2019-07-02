@@ -1,5 +1,3 @@
-# selector.coffee
-#
 # Impliments the selection behavior within a group of selectable dice of a
 # specifc type (i.e.: ability)
 
