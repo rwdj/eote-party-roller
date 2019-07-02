@@ -14,7 +14,7 @@ class DicePool
 
   DEFAULT_ROLLER = 'Anon'
   DEFAULT_PURPOSE = 'N/A'
-  DNR_SEQUENCE = "#{27.chr}d"
+  DNR_SEQUENCE = /^dnr(?!\w):?\s*/i.freeze
 
   define_attribute_methods :roller, :dice, :purpose, :result
   attr_accessor :roller, :dice, :purpose
@@ -97,8 +97,8 @@ class DicePool
     {
       roller: roller,
       purpose: purpose,
-      dice: DicePoolsController.render_dice(JSON.parse(cookie_dice)),
-      result: DicePoolsController.render_result(JSON.parse(cookie_result))
+      dice: cookie_dice,
+      result: cookie_result
     }
   end
 
@@ -119,7 +119,6 @@ class DicePool
   end
 
   def cookie_dice
-    LogHandler::Debug.log_dice_results dice
     dice.map do |die, die_results|
       [die.name.to_s, die_results.map(&:displayable_results)]
     end.to_h.to_json

@@ -1,0 +1,26 @@
+<div id='roller'>
+  <p id='notice'><%= notice %></p>
+
+  <div id='results'>
+    <%= render 'templates/dice_results' %>
+    <%= hrule(margin: '0.5em 0') %>
+    <%= render 'templates/pool_results' %>
+  </div>
+  <%= hrule(margin: '0.5em 0') %>
+
+  <div id='dice-pool'>
+    <%= form_with(url: roller_url, model: @dice_pool, local: true, id: 'roller-form') do |form| %>
+      <div class='block-field'>
+        <%= form.label :name %>
+        <%= form.text_field :roller, id: :dice_pool_roller %>
+      </div>
+
+      <div class='block-field'>
+        <%= form.label :purpose %>
+        <%= form.text_field :purpose, id: :dice_pool_purpose %>
+      </div>
+
+      <%= render 'dice_selection', form: form %>
+    <% end %>
+  </div>
+</div>

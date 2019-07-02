@@ -1,3 +1,6 @@
+# Impliments the collection behavior within a group of selectable dice of a
+# specifc type (i.e.: ability)
+
 class @SelectorGroup.SelectorCollection
   constructor: (firstNode, @_group) ->
     @_data = [@last = new window.SelectorGroup.Selector(null, firstNode, null)]

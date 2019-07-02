@@ -1,10 +1,10 @@
-<div class='flex-container dice-selection'>
+<div class='dice-selection'>
     <% DieTypes::PAIRS.each do |group| %>
-    <div class='dice-selection-group'>
+    <div class='group'>
       <% group.each do |die_type| %>
         <% next unless die_type %>
-        <div class='dice-selection-dice <%= die_type %>' data-die-name='<%= die_type %>'>
-          <div class='dice-selection-die <%= die_type %>'></div>
+        <div class='dice <%= die_type %>' data-die-name='<%= die_type %>'>
+          <div class='die <%= die_type %>'></div>
         </div>
       <% end %>
     </div>

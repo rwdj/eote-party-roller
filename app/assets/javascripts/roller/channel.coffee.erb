@@ -1,0 +1,38 @@
+# Impliments the broadcast receiver (channel) for ActionCable
+#
+#= require ./lib/struct/templates
+#= require ./lib/result_handler
+
+App = @App
+
+App.rolls = App.cable.subscriptions.create 'RollsChannel', {
+  received: (data) ->
+    @insertEmptyRoll(data)
+    @insertRollResult(data)
+
+  insertEmptyRoll: (data) ->
+    @ROLL_INDEX_NODE.prepend @renderRollRow(data)
+
+  insertRollResult: (data) ->
+    window.ResultHandler.insert JSON.parse(data.result), JSON.parse(data.dice)
+
+  renderRollRow: (data) ->
+    row = document.createElement('tr')
+    row.innerHTML = @renderRollRollContents(data)
+    if data.dnr then row.classList.add('dnr')
+    row
+
+  renderRollRollContents: (data) ->
+    [
+      '<td>' + data.roller + '</td>',
+      '<td>' + window.Templates.purpose(data.purpose) + '</td>',
+      '<td>' + Templates.dice_results + '</td>',
+      '<td>' + Templates.pool_results + '</td>',
+    ].join('')
+}
+
+document.addEventListener 'turbolinks:load', ->
+  App.rolls.ROLL_INDEX_NODE =
+    document.querySelectorAll('#rolls table tbody')[0]
+
+@ROLLS_CHANNEL = App.rolls

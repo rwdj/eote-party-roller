@@ -9,7 +9,8 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag File.join('rolls', 'rolls'), 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'roller', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag('gm', 'data-turbolinks-track': 'reload') if params[:action].eql? 'gm_index' %>
   </head>
 
   <body>
