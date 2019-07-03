@@ -7,9 +7,9 @@ class @ResultNotificationHandler
     setTimeout @flashIndex, 0
     return false if !window.notifyable || window.isFocused
 
-    title = "#{data.roller} rolled."
     result_string = @parseResults(JSON.parse(data.result))
-    new Notification(title, { body: "#{result_string} — #{data.purpose}" })
+    title = "#{data.roller} rolled: #{data.purpose}"
+    new Notification(title, { body: result_string })
 
   @parseResults: (results) ->
     Object.keys(results).map((resultType) ->
