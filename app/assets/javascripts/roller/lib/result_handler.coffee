@@ -13,6 +13,7 @@ class @ResultHandler
     @_reset()
     @_set_results(results, @_result_nodes.pool_results)
     @_set_dice(grouped_dice, @_result_nodes.dice_results)
+    window.scroll(0, 0)
 
   @insert: (results, grouped_dice) ->
     @_set_dice(grouped_dice,
