@@ -2,6 +2,7 @@
 #
 #= require ./lib/struct/templates
 #= require ./lib/result_handler
+#= require ./lib/result_notification_handler
 
 App = @App
 
@@ -9,6 +10,7 @@ App.rolls = App.cable.subscriptions.create 'RollsChannel', {
   received: (data) ->
     @insertEmptyRoll(data)
     @insertRollResult(data)
+    window.ResultNotificationHandler.send(data)
 
   insertEmptyRoll: (data) ->
     @ROLL_INDEX_NODE.prepend @renderRollRow(data)
