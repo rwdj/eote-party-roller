@@ -13,7 +13,7 @@ App.rolls = App.cable.subscriptions.create 'RollsChannel', {
     @_insertEmptyRoll(data)
     @_insertRollResult(data)
     window.ResultNotificationHandler.send(data)
-    if @_tooManyRolls() then @_popRoll()
+    @_popRoll()
 
   _insertRollResult: (data) ->
     results = JSON.parse(data.results)
@@ -24,11 +24,9 @@ App.rolls = App.cable.subscriptions.create 'RollsChannel', {
   _insertEmptyRoll: (data) ->
     @ROLL_INDEX_NODE.prepend @_renderRollRow(data)
 
-  _tooManyRolls: ->
-    @ROLL_INDEX_NODE.childElementCount > @MAX_INDEX_ROLLS
-
   _popRoll: ->
-    @ROLL_INDEX_NODE.removeChild(@ROLL_INDEX_NODE.lastChild)
+    while @ROLL_INDEX_NODE.childElementCount > @MAX_INDEX_ROLLS
+      @ROLL_INDEX_NODE.removeChild(@ROLL_INDEX_NODE.lastChild)
 
   _renderRollRow: (data) ->
     row = document.createElement('tr')
