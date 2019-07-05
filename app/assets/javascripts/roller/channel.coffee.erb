@@ -7,27 +7,36 @@
 App = @App
 
 App.rolls = App.cable.subscriptions.create 'RollsChannel', {
+  MAX_INDEX_ROLLS: 50
+
   received: (data) ->
-    @insertEmptyRoll(data)
-    @insertRollResult(data)
+    @_insertEmptyRoll(data)
+    @_insertRollResult(data)
     window.ResultNotificationHandler.send(data)
+    if @_tooManyRolls() then @_popRoll()
 
-  insertEmptyRoll: (data) ->
-    @ROLL_INDEX_NODE.prepend @renderRollRow(data)
-
-  insertRollResult: (data) ->
+  _insertRollResult: (data) ->
     results = JSON.parse(data.results)
     window.ResultHandler.insert(
       JSON.parse(results.pool), JSON.parse(results.dice)
     )
 
-  renderRollRow: (data) ->
+  _insertEmptyRoll: (data) ->
+    @ROLL_INDEX_NODE.prepend @_renderRollRow(data)
+
+  _tooManyRolls: ->
+    @ROLL_INDEX_NODE.childElementCount > @MAX_INDEX_ROLLS
+
+  _popRoll: ->
+    @ROLL_INDEX_NODE.removeChild(@ROLL_INDEX_NODE.lastChild)
+
+  _renderRollRow: (data) ->
     row = document.createElement('tr')
-    row.innerHTML = @renderRollRollContents(data)
+    row.innerHTML = @_renderRollRollContents(data)
     if data.dnr then row.classList.add('dnr')
     row
 
-  renderRollRollContents: (data) ->
+  _renderRollRollContents: (data) ->
     [
       '<td>' + data.roller + '</td>',
       '<td>' + window.Templates.purpose(data.purpose) + '</td>',
