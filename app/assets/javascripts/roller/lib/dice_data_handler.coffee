@@ -4,9 +4,6 @@ class @DiceDataHandler
   @init: ->
     @_node = document.getElementById 'dice_pool_dice'
 
-  @update: (dice_data) ->
-    @_node.value = JSON.stringify dice_data
-
   @fetch: ->
     try
       val = JSON.parse @_node.value
@@ -20,9 +17,12 @@ class @DiceDataHandler
   @set: (dieName, value) ->
     data = @fetch()
     data[dieName] = value
-    @update(data)
+    @_update(data)
 
   @remove: (dieName) ->
     data = @fetch()
     delete data[dieName]
-    @update(data)
+    @_update(data)
+
+  @_update: (dice_data) ->
+    @_node.value = JSON.stringify dice_data
