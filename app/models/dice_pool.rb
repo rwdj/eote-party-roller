@@ -15,20 +15,22 @@ class DicePool
   DEFAULT_ROLLER = 'Anon'
   DEFAULT_PURPOSE = 'N/A'
   DNR_SEQUENCE = /^dnr(?!\w):?\s*/i.freeze
+  NAME_MAX_LENGTH = 10
+  PURPOSE_MAX_LENGTH = 300
 
   define_attribute_methods :roller, :dice, :purpose, :result
   attr_accessor :roller, :dice, :purpose
   attr_reader :result
 
   validates :roller, presence: true, length: {
-    in: 2...10,
+    in: 2...NAME_MAX_LENGTH,
     message: 'Must have a roller name (Maximum: 10).'
   }
   validates :dice, allow_nil: false, length: {
     minimum: 1, message: 'Must have dice to roll.'
   }
   validates :purpose, presence: true, length: {
-    in: 2...300,
+    in: 2...PURPOSE_MAX_LENGTH,
     message: 'Must have a purpose (Maximum: 300).'
   }
 
