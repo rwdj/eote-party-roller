@@ -4,14 +4,13 @@
       <% group.each do |die_type| %>
         <% next unless die_type %>
         <div class='dice <%= die_type %>' data-die-name='<%= die_type %>'>
-          <div class='die <%= die_type %>'></div>
+          <div class='die <%= die_type %> faded'></div>
         </div>
       <% end %>
     </div>
   <% end %>
 </div>
 
-<div class="block-field" hidden>
-  <%= form.label :dice %>
-  <%= form.text_field :view_dice, id: :dice_pool_dice %>
+<div class="block-field">
+  <%= form.text_field :json_dice, id: :dice_pool_dice %>
 </div>
