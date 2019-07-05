@@ -77,8 +77,6 @@
 }
 
 #rolls {
-  display: none;
-
   .die, .pool-results .result { height: 2em; width: 2em; }
 }
 
@@ -106,7 +104,8 @@
 
             <% DieTypes::ALL.map(&:to_s).each do |die_name| %>
               &.<%= die_name %> {
-                background-image: asset-url("<%= image_path(File.join('dice', 'icon', die_name)) %>");
+                background-image: asset-url(
+                  "<%= image_path(File.join('dice', 'icon', die_name)) %>");
               }
             <% end %>
 
@@ -118,4 +117,9 @@
   }
 }
 
-#rolls, #roller { min-height: 100vh; }
+.page {
+  &.closed { display: none; }
+  &.open { min-height: 100vh; }
+}
+
+p a { display: inline; }

@@ -2,8 +2,9 @@
 
 <div <%= sticky ? "id='#{sticky}-nav'" : '' %> class='nav<%= sticky ? ' ' + sticky : ''%>'>
   <div class='nav-table base'>
-    <%= nav_button_cell('roll', 'roll') %>
-    <%= nav_button_cell('toggle-index', 'index') %>
+    <%= nav_button_cell('page', 'info', data: { page: 'info' }) %>
+    <%= nav_button_cell('page roll', 'roll', data: { page: 'roller' }) %>
+    <%= nav_button_cell('page', 'index', data: { page: 'rolls' }) %>
   </div>
 </div>
 

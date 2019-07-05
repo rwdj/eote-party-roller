@@ -15,4 +15,6 @@ class @RollHandler
 document.addEventListener 'turbolinks:load', ->
   window.RollHandler.init()
   for rollBtn in document.querySelectorAll '.btn.roll'
-    rollBtn.addEventListener 'click', -> window.RollHandler.roll()
+    rollerPage = document.getElementById rollBtn.dataset.page
+    rollBtn.addEventListener 'click', ->
+      if rollerPage.classList.contains('open') then window.RollHandler.roll()
