@@ -3,15 +3,17 @@
 class @ResultNotificationHandler
   @opts: {}
 
-  @send: (data) ->
+  @send: (dice_pool) ->
     setTimeout @flashIndex, 0
     return false if !window.notifyable || window.isFocused
 
-    result_string = @parseResults(JSON.parse(data.result))
-    title = "#{data.roller} rolled: #{data.purpose}"
+    results = JSON.parse(dice_pool.results)
+    result_string = @parseResults(JSON.parse(results.pool))
+    title = "#{dice_pool.roller} rolled: #{dice_pool.purpose}"
     new Notification(title, { body: result_string })
 
   @parseResults: (results) ->
+    # console.log results
     Object.keys(results).map((resultType) ->
       shortResultType = resultType[0].toUpperCase()
       if resultType[0] in ['d', 't'] then shortResultType += resultType[1]
