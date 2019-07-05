@@ -23,6 +23,6 @@ class @ResultNotificationHandler
     timeInterval = 1000
     for i in [0..1]
       setTimeout(->
-        for indexBtn in document.querySelectorAll('.btn.toggle-index')
-          indexBtn.classList.toggle('lit')
+        indexBtns = document.querySelectorAll(".btn.page[data-page='rolls']")
+        indexBtn.classList.toggle('lit') for indexBtn in indexBtns
       timeInterval * i)
