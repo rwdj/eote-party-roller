@@ -18,4 +18,9 @@
     @extend .far-icon;
     &:before { content: fa-content($fa-var-list-ul); }
   }
+
+  &.info {
+    @extend .far-icon;
+    &:before { content: fa-content($fa-var-info-circle); }
+  }
 }

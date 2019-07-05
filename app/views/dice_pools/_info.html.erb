@@ -1,0 +1,44 @@
+<div id='info' class='page openable closed'>
+  <h4>How to Use</h4>
+
+  <%# General %>
+  <div>
+    <h5>Purpose</h5>
+    <p>The roller can be used by groups to roll dice together.</p>
+  </div>
+
+  <%# Roller %>
+  <div>
+    <h5>Roller <%= die_icon = nav_icon('roll') %></h5>
+    <p>Select the dice pool and click the <%= die_icon %> to roll.</p>
+    <p>Fill in purpose and name to inform the DM of the roll's intent.</p>
+    <p>
+      Name: Your name. Used for the group to identify you.
+      <%= DicePool::NAME_MAX_LENGTH %> characters max.
+    </p>
+    <p>
+      Purpose: Your purpose for a given roll. Used for the DM to know what you
+      wanted from the roll. <%= DicePool::PURPOSE_MAX_LENGTH %> characters max.
+    </p>
+    <p>
+      <span class='important'>DNR: </span>
+      Put &ldquo;dnr&rdquo; or &ldquo;dnr:&rdquo; (any case) at the front of
+      the purpose to hide from regular rollers.
+    </p>
+  </div>
+
+  <%# Index %>
+  <div>
+    <h5>Rolls Index <%= nav_icon('index') %></h5>
+    <p>Shows roll results for the group.</p>
+    <p>Click a long pupose to expand.</p>
+  </div>
+
+  <%# GMs %>
+  <div>
+    <h5>GMs</h5>
+    <p>Hidden rolls are available <a href='/gm'>here</a>.</p>
+    <p>In the GM page, all rolls, including hidden rolls are shown.</p>
+    <p>GM only, please.</p>
+  </div>
+</div>
