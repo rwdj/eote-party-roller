@@ -55,7 +55,7 @@ class DicePoolsController < ApplicationController
   # Never trust parameters; only allow the white list.
   def dice_pool_params
     params.require(:dice_pool)
-          .permit(:roller, :purpose, :result, :rolled, :view_dice)
+          .permit(:roller, :purpose, :result, :rolled, :json_dice)
   end
 
   def handle_roll
@@ -63,7 +63,8 @@ class DicePoolsController < ApplicationController
     @dice_pool.roll
 
     render json: {
-      result: @dice_pool.cookie_result, dice: @dice_pool.cookie_dice
+      pool: @dice_pool.json_pool_results,
+      dice: @dice_pool.json_dice_results
     }
   rescue ActiveModel::ValidationError
     render json: { message: @dice_pool.errors.values.flatten.join(' ') },

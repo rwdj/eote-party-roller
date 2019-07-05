@@ -12,9 +12,9 @@ class @DicePool
       type: 'post'
       dataType: 'JSON'
       data: @_roll_data()
-      success: (data) ->
+      success: (results) ->
         dice_pool._clear_error()
-        ResultHandler.set(JSON.parse(data.result), JSON.parse(data.dice))
+        ResultHandler.set(JSON.parse(results.pool), JSON.parse(results.dice))
       error: (error) -> dice_pool._notify_error(error.message)
     }
 
@@ -24,12 +24,11 @@ class @DicePool
           {
             roller: @roller.trim()
             purpose: @purpose.trim()
-            view_dice: JSON.stringify @dice
+            json_dice: JSON.stringify @dice
           }
       }
 
   _notify_error: (error) ->
     document.getElementById('notice').innerHTML = error
 
-  _clear_error: ->
-    @_notify_error ''
+  _clear_error: -> @_notify_error ''

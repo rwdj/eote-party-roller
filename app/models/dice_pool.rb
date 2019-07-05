@@ -50,23 +50,13 @@ class DicePool
   end
 
   def as_json
-    {
-      roller: roller, purpose: purpose, dice: dice.transform_keys(&:name)
-    }.to_json
+    { roller: roller, purpose: purpose, json_dice: json_dice }.to_json
   end
 
   def attributes=(hash)
     hash.symbolize_keys!
 
-    if hash[:dice]
-      hash[:dice] = hash.delete(:dice).transform_keys do |die_name|
-        Die.find_by(name: die_name)
-      end
-    end
-
-    hash.each do |key, value|
-      send("#{key}=", value)
-    end
+    hash.each { |key, value| send("#{key}=", value) }
   end
 
   # Gives a pretty readable string to print this instance
@@ -97,28 +87,30 @@ class DicePool
     {
       roller: roller,
       purpose: purpose,
-      dice: cookie_dice,
-      result: cookie_result
+      results: {
+        dice: json_dice_results,
+        pool: json_pool_results
+      }.to_json
     }
   end
 
-  def view_dice
-    dice.transform_keys(&:name).stringify_keys.to_json
-  end
-
-  def view_dice=(view_dice_s)
-    return if view_dice_s.blank?
-
-    self.dice = JSON.parse(view_dice_s).transform_keys! do |die_name|
+  # Loads dice from a map of dice names to dice counts
+  def json_dice=(dice_json)
+    @dice = JSON.parse(dice_json).transform_keys do |die_name|
       Die.find_by(name: die_name.to_sym)
     end
   end
 
-  def cookie_result
+  # a map of dice names to dice counts
+  def json_dice
+    dice.transform_keys(&:name).to_json
+  end
+
+  def json_pool_results
     result.stringify_keys.to_json
   end
 
-  def cookie_dice
+  def json_dice_results
     dice.map do |die, die_results|
       [die.name.to_s, die_results.map(&:displayable_results)]
     end.to_h.to_json
