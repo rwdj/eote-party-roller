@@ -16,13 +16,16 @@
   z-index: 2;
   padding: 1.5em;
   background-color: #222;
-  width: 50%;
   display: inline-block;
   border-radius: 2em;
   position: absolute;
-  top: 25%; left: 25%;
+  top: 25%; left: 10%; right: 10%;
   vertical-align: middle;
 
-  .nav-td:hover { background-color: #0000; }
   input[type='text'], textarea { background-color: #111; }
+
+  .nav-td {
+    border-radius: 2em;
+    background-color: #333;
+  }
 }

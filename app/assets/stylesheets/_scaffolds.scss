@@ -24,24 +24,18 @@ form {
     width: 95%;
     margin: 0 2.5% 0;
     line-height: 1.3em;
+    font-size: 1.15em;
   }
 
-  input[type='text'], textarea {
-    border-top: none;
-    border-right: none;
-    border-bottom: solid 0.1em;
-    border-left: none;
-  }
+  input[type='text'], textarea { border: none; }
 
-  input[type='checkbox'] {
-    margin: 0 2.5%;
-  }
+  input[type='checkbox'] { margin: 0 2.5%; }
 
   .block-field, .action {
-      margin-bottom: 1em;
-      width: 95%;
-      padding: 0 2.5%;
-    }
+    margin-bottom: 1em;
+    width: 95%;
+    padding: 0 2.5%;
+  }
 
   label { display: block; }
 }
