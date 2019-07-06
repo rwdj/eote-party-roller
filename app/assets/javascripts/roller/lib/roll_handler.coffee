@@ -10,6 +10,7 @@ class @RollHandler
   @roll: ->
     window.DicePoolExtractor.extract().roll()
     @hideDetails()
+    document.body.style.zoom = 1
 
   @_initDependencies: ->
     window.SelectorGroup.init()
