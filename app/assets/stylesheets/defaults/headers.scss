@@ -12,8 +12,6 @@ h6 { font-size: 0.7em }
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   text-align: center;
-
-  &.page-title {
-    padding: 0.5em 0.5em;
-  }
 }
+
+.page-title { padding: 0.5em 0.5em; }

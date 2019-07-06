@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-div.nav-bar {
+.nav-bar {
   width: 100%;
   font-size: 1.7em;
   z-index: 2;
@@ -22,23 +22,23 @@ div.nav-bar {
   }
 }
 
-div.nav-line {
+.nav-line {
   width: 100%;
   font-size: 1.7em;
 }
 
-div.nav-table {
+.nav-table {
   display: table;
   table-layout: fixed;
   width: 100%;
 }
 
-div.nav-td {
+.nav-td {
   display: table-cell;
   text-align: center;
 
   // Extend a clickable div's font hover color to child links
-  > a, > div.btn {
+  > a, > .btn {
     padding: 0.27em 0;
     display: block;
   }

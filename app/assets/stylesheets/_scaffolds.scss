@@ -37,15 +37,11 @@ form {
     margin: 0 2.5%;
   }
 
-  div {
-    &.block-field, &.action {
+  .block-field, .action {
       margin-bottom: 1em;
       width: 95%;
       padding: 0 2.5%;
     }
-  }
 
-  label {
-    display: block;
-  }
+  label { display: block; }
 }
