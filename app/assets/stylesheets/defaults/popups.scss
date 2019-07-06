@@ -1,0 +1,28 @@
+// Place all the styles related to popups here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.screencover {
+  position: fixed;
+  // display: none;
+  width: 100%;  height: 100%;
+  top: 0; left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.popup {
+  z-index: 2;
+  padding: 1.5em;
+  background-color: #222;
+  width: 50%;
+  display: inline-block;
+  border-radius: 2em;
+  position: absolute;
+  top: 25%; left: 25%;
+  vertical-align: middle;
+
+  .nav-td:hover { background-color: #0000; }
+  input[type='text'], textarea { background-color: #111; }
+}

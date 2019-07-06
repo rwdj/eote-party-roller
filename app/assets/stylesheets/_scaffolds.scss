@@ -19,14 +19,14 @@ form {
     color: #bbb;
   }
 
-  input[type='text'], select {
+  input[type='text'], select, textarea {
     background-color: #000;
     width: 95%;
     margin: 0 2.5% 0;
     line-height: 1.3em;
   }
 
-  input[type='text'] {
+  input[type='text'], textarea {
     border-top: none;
     border-right: none;
     border-bottom: solid 0.1em;

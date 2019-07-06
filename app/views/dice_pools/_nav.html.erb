@@ -1,9 +1,9 @@
 <%= hrule if sticky.eql?('bottom') %>
 
-<div <%= sticky ? "id='#{sticky}-nav'" : '' %> class='nav<%= sticky ? ' ' + sticky : ''%>'>
+<div <%= sticky ? "id='#{sticky}-nav'" : '' %> class='nav-bar<%= sticky ? ' ' + sticky : ''%>'>
   <div class='nav-table base'>
     <%= nav_button_cell('page', 'info', data: { page: 'info' }) %>
-    <%= nav_button_cell('page roll', 'roll', data: { page: 'roller' }) %>
+    <%= nav_button_cell('page roll-details', 'roll', data: { page: 'roller' }) %>
     <%= nav_button_cell('page', 'index', data: { page: 'rolls' }) %>
   </div>
 </div>

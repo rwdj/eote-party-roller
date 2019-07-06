@@ -3,7 +3,7 @@ module ApplicationHelper
   def nav_button_cell(action_type, *icon_names, **options)
     return generate_empty_nav_cell unless action_type.present?
 
-    nav_cell(nav_button(action_type, icon_names, options))
+    nav_cell(nav_button(action_type, icon_names, **options))
   end
 
   private
@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   # Creats an action link for a nav <div> containing listed icons
-  def nav_button(action_type, icon_names, options)
+  def nav_button(action_type, icon_names, **options)
     options[:class] = [
       'btn', action_type, options[:class]
     ].keep_if(&:present?).join(' ')

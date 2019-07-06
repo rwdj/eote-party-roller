@@ -1,5 +1,6 @@
 <div id='roller' class='page openable open'>
-  <p id='notice'><%= notice %></p>
+  <p id='notice'><p>
+
 
   <div id='results'>
     <%= render 'templates/dice_results' %>
@@ -10,16 +11,7 @@
 
   <div id='dice-pool'>
     <%= form_with(url: roller_url, model: @dice_pool, local: true, id: 'roller-form') do |form| %>
-      <div class='block-field'>
-        <%= form.label :name %>
-        <%= form.text_field :roller, id: :dice_pool_roller %>
-      </div>
-
-      <div class='block-field'>
-        <%= form.label :purpose %>
-        <%= form.text_field :purpose, id: :dice_pool_purpose %>
-      </div>
-
+      <%= render 'details', form: form %>
       <%= render 'dice_selection', form: form %>
     <% end %>
   </div>
