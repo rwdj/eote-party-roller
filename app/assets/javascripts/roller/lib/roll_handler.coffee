@@ -6,6 +6,7 @@ class @RollHandler
   @init: ->
     @_initDependencies()
     @detailsNode = document.getElementById('details')
+    @detailsNode.purposeNode = document.getElementById('dice_pool_purpose')
 
   @roll: ->
     window.DicePoolExtractor.extract().roll()
@@ -18,7 +19,7 @@ class @RollHandler
 
   @askDetails: ->
     @detailsNode.style.display = 'block'
-    document.getElementById('dice_pool_purpose').focus()
+    @detailsNode.purposeNode.focus()
 
   @hideDetails: -> @detailsNode.style.display = 'none'
 
