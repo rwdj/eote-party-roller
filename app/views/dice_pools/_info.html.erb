@@ -34,11 +34,19 @@
     <p>Click on a purpose with &ldquo;...&rdquo; to expand.</p>
   </div>
 
-  <%# GMs %>
-  <div>
-    <h5>GMs</h5>
-    <p>Hidden rolls are available <a href='/gm'>here</a>.</p>
-    <p>In the GM page, all rolls, including hidden rolls are shown.</p>
-    <p>GM only, please.</p>
-  </div>
+  <% if params[:action].eql? 'index' %>
+    <%# GMs %>
+    <div>
+      <h5>GMs</h5>
+      <p>Hidden rolls are available <a href='/gm'>here</a>.</p>
+      <p>In the GM page, all rolls, including hidden rolls are shown.</p>
+      <p>GM only, please.</p>
+    </div>
+  <% else %>
+    <%# Players %>
+    <div>
+      <h5>Players</h5>
+      <p>Players should roll <a href='/'>here</a>.</p>
+    </div>
+  <% end %>
 </div>
