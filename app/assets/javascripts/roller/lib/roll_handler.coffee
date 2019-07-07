@@ -6,7 +6,8 @@ class @RollHandler
   @init: ->
     @_initDependencies()
     @detailsNode = document.getElementById('details')
-    @detailsNode.purposeNode = document.getElementById('dice_pool_purpose')
+    @detailsNode.purposeNode =
+      document.getElementById('dice_pool_shadow_purpose')
 
   @roll: ->
     window.DicePoolExtractor.extract().roll()

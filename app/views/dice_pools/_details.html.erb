@@ -6,9 +6,14 @@
       <%= form.text_field :roller, id: :dice_pool_roller %>
     </div>
 
-    <div class='block-field'>
+    <div class='block-field' hidden>
       <%= form.label :purpose %>
       <%= form.text_area :purpose, id: :dice_pool_purpose %>
+    </div>
+
+    <div class='block-field'>
+      <%= form.label :purpose %>
+      <%= form.text_area :shadow_purpose, id: :dice_pool_shadow_purpose %>
     </div>
 
     <div class='nav-line'>

@@ -3,15 +3,20 @@
 #= require ./struct/dice_pool
 
 class @DicePoolExtractor
-  @_nodes: {}
-
   @init: ->
-    @_nodes.roller = document.getElementById 'dice_pool_roller'
-    @_nodes.purpose = document.getElementById 'dice_pool_purpose'
+    @rollerNode = document.getElementById('dice_pool_roller')
+    @purposeNode = document.getElementById('dice_pool_shadow_purpose')
+    @purposeNode.value = document.getElementById('dice_pool_purpose').value
+    @swapPurpose()
+
+  @swapPurpose: ->
+    [@purposeNode.value, @purposeNode.placeholder] =
+        ['', @purposeNode.value || @purposeNode.placeholder]
+    @purposeNode.placeholder
 
   @extract: ->
     new DicePool(
-      @_nodes.roller.value
-      @_nodes.purpose.value
+      @rollerNode.value
+      @swapPurpose()
       window.DiceDataHandler.fetch()
     )
